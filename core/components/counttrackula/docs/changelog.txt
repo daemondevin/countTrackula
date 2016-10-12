@@ -1,0 +1,11 @@
+Changelog for countTrackula
+
+countTrackula 1.0.1
+---------------------------------
+Fixed damn near everything with the script
+ - list to long to actually write out
+
+countTrackula 1.0.0
+---------------------------------
+Initial Version
+ - countTrackula has risen from it's eternal slumber!
