@@ -1,7 +1,7 @@
 countTrackula Extra for MODx Revolution
 =======================================
 
-**Author:** demon.devin <demon.devin@gmail.com>
+**Author:** daemon.devin <daemon.devin@gmail.com>
 
-Documentation is available at [Softables](http://softables.tk/extras/countTrackula)
+Documentation is available at [PortableAppz.x10.mx/](http://portableappz.x10.mx/extras/countTrackula)
 
