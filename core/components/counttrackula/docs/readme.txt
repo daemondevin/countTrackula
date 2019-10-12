@@ -1,43 +1,69 @@
 --------------------
 Extra: countTrackula
 --------------------
-Version: 1.0.1
+Version: 2.0
 
-Author: demon.devin <demon.devin@gmail.com>
-Copyright 2016
+Author: daemon.devin <daemon.devin@gmail.com>
+Copyright 2019 and beyond
 
-Official Documentation: http://portableappz.cu.cc/extras/countTrackula
+Official Documentation: http://portableappz.x10.mx/extras/countTrackula
 
-Bugs and Feature Requests: https://github.com:demondevin/countTrackula
+Bugs and Feature Requests: https://github.com/daemondevin/countTrackula
 
-Questions: http://forums.modx.com
+Questions: http://community.modx.com
 
 --------------------
 How to use
 --------------------
 
- With this snippet you will have the ability to display the number of downloads both unique or total.
+# countTrackula 2.0
+With this snippet you will have the ability to display the number of downloads for a local file or the number of clicks on a remote file. It'll also create a hashed link of the local or remote file for security purposes hiding the file path of a locally hosted file.
 
- PROPERTIES
- &path       string   required    path to the file to download with trailing slash
- &file       string   required    filename of the download without any slashes
- &name       string   optional    the title of the link you want to show | defaults to &file
- &hits       boolean  optional    just shows the download count of &file | defaults to false
- &resume     boolean  optional    specify support for resumable download | defaults to false
- &showhits   boolean  optional    shows the hit count on a download link | defaults to false
+## System Settings
+| Name | Description |
+|--|--|
+| `algo` | The desired algorithm to use when creating a checksum of the download file. Refer to the PHP Documentation for a list of supported algorithms to choose from. Default: `SHA1` |
+| `salt` | Define a secret passphrase to be used with generating the checksum. Default: `countTrackula's best friend is decrypt-keeper` |
+| `core_path` | Just the path to the component files for use with the snippet. Best just to leave this untouched. |
 
- EXAMPLE 
- Give a file with a &path of `downloads/` and a &file name of `MyPackage.zip` 
- With the &name of `My Package` and supports resume download while showing the hit count.
 
- [[!countTrackula? &path=`downloads/` &file='MyPackage.zip' &name=`My Package` &resume=`true` &showhits=`true`]]
+## Properties
+| Property | Type | Req/Opt | Description |
+|--|--|--|--|
+| `&path` | String | Required | Path to the download file from webroot.
+| `&file` | String | Required | The filename of the download without slashes. |
+| `&name` | String | Required | The name of your download file for display purposes. |
+| `&term` | String | Optional | The word shown next to download count. (*i.e.* 18 hits) |
+| `&hits` | Boolean | Optional | If true, only shows the download count of `&file`. |
+| `&tpl` | String | Optional | The chunk used for displaying the download link to the client. |
 
- Output: My Package (# hits)
- Output pagesource: <a href="REQUEST_URI?download=FILENAMEmd5HASH">My Package</a> (# hits)
- 
- To just show the number of times &file has been downloaded.  # = the actual number
- 
- [[!countTrackula? &path=`downloads/` &file='MyPackage.zip' &hits=`true`]]
- 
- Output: #
- Output pagesource: #
+
+## Example
+
+#### &mdash;Locally Hosted Files
+Define a download with a property **path** of `downloads/` and a property **file** of `MyPackage.zip` with the property **name** of `My Package`
+
+##### **SOURCE**:
+
+    [[!countTrackula? &path=`downloads/` &file='MyPackage.zip' &name=`My Package`]]
+
+##### **OUTPUT**:
+My Package (18 downloads)
+
+    <a href="http://example.com/?download=SALTEDHASHCHECKSUM">My Package</a> (18 downloads)
+To only show the download count of *My Package*  but use the term *hits* instead of *downloads* use the following:
+
+    [[!countTrackula? &path=`downloads/` &file='MyPackage.zip' &hits=`true` &term=`hits`]]
+##### OUTPUT:
+18 hits
+
+
+#### &mdash;Remotely Hosted Files
+To define a remote file for download with the property **term** of *clicks* set the **file** property as the link to the file like below. *Note:* This feature has barely been tested so please report any erroneous findings you may run into on my [GitHub project page](https://github.com/daemondevin/countTrackula).
+##### SOURCE:
+
+    [[!countTrackula? &file=`http://example.com/files/countTrackula-2.0-pl.transport.zip` &name=`countTrackula` &term=`clicks`]]
+##### OUTPUT:
+countTrackula (18 clicks)
+
+    <a href="http://example.com/?download=SALTEDHASHCHECKSUM&link=true">countTrackula</a> (18 clicks)

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model package="counttrackula" baseClass="xPDOObject" platform="mysql" defaultEngine="InnoDB" version="1.1">
+
+	<object class="Victims" table="victims" extends="xPDOSimpleObject">
+
+    <field key="path" dbtype="varchar" precision="255" phptype="string" null="false" default="" index="index" />
+    <field key="ip" dbtype="varchar" precision="25" phptype="string" null="false" default="0.0.0.0" />
+    <field key="downloadedon" dbtype="datetime" phptype="datetime" null="false" />
+    <field key="unique" dbtype="tinyint" precision="1" attributes="unsigned" phptype="boolean" null="false" default="0" index="index" />
+    <field key="referer" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
+    <field key="user" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
+
+    <index alias="path" name="path" primary="false" unique="false" type="BTREE">
+      <column key="path" length="" collation="A" null="false" />
+    </index>
+    <index alias="unique" name="unique" primary="false" unique="false" type="BTREE">
+      <column key="unique" length="" collation="A" null="false" />
+    </index>
+    <index alias="user" name="user" primary="false" unique="false" type="BTREE">
+      <column key="user" length="" collation="A" null="false" />
+    </index>
+
+    <aggregate alias="User" class="modUser" local="user" foreign="id" cardinality="one" owner="foreign" />
+
+	</object>
+
+</model>

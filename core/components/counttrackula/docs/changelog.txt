@@ -1,5 +1,14 @@
 Changelog for countTrackula
 
+countTrackula 2.0
+---------------------------------
+A complete rewrite of the script
+ - Added support for both local and remote files
+ - Better hashing support--added an optional user define salt
+ - Removed file based logging in favor of MySQL logging
+ - Added ability to show just unique downloads based on clients IP
+ - Added support to call this snippet multiple times in a single resource
+
 countTrackula 1.0.1
 ---------------------------------
 Fixed damn near everything with the script
